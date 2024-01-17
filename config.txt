@@ -25,6 +25,42 @@ epochs                  25
 
 ### individual settings for dataset and model/training
 dset_model_trn_config                   # do not delete
+dataset                 b9k1
+downsample              1
+dl                      30
+stride                  10
+entities                all
+train_method            train_together
+model                   NPSR
+pred_dl                 30
+delta                   6
+heads                   4
+theta_N_ratio           0.90
+
+dataset                 k9l1
+downsample              1
+dl                      30
+stride                  10
+entities                all
+train_method            train_together
+model                   NPSR
+pred_dl                 30
+delta                   6
+heads                   4
+theta_N_ratio           0.90
+
+dataset                 l9b1
+downsample              1
+dl                      30
+stride                  10
+entities                all
+train_method            train_together
+model                   NPSR
+pred_dl                 30
+delta                   6
+heads                   4
+theta_N_ratio           0.90
+
 # dataset                 MGAB
 # downsample              2
 # dl                      200
@@ -138,17 +174,15 @@ dset_model_trn_config                   # do not delete
 # heads                   8
 # theta_N_ratio           0.9985
 
-dataset                 trimSyn
-downsample              1
-dl                      50
-stride                  10
-entities                all
-train_method            train_together
-model                   NPSR
-pred_dl                 50
-delta                   6
-heads                   5
-theta_N_ratio           0.9985
-
-
+# dataset                 trimSyn
+# downsample              1
+# dl                      50
+# stride                  10
+# entities                all
+# train_method            train_together
+# model                   NPSR
+# pred_dl                 50
+# delta                   6
+# heads                   5
+# theta_N_ratio           0.9985
 

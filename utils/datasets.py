@@ -63,6 +63,27 @@ def get_dataset_processed(params):
             sys.path.append(data_path)
         from preprocess_PSM import PSM_Dataset
         dataset = PSM_Dataset(dataset_pth = data_path + params.name + '.pk')
+    
+    elif params.name == 'b9k1':
+        data_path = 'datasets/processed_sim_data/'
+        if data_path not in sys.path:
+            sys.path.append(data_path)
+        from preprocess_SIM import SIM_Dataset
+        dataset = SIM_Dataset(dataset_pth = data_path + 'b9k1' + '.pk')
+
+    elif params.name == 'k9l1':
+        data_path = 'datasets/processed_sim_data/'
+        if data_path not in sys.path:
+            sys.path.append(data_path)
+        from preprocess_SIM import SIM_Dataset
+        dataset = SIM_Dataset(dataset_pth = data_path + 'k9l1' + '.pk')
+
+    elif params.name == 'l9b1':
+        data_path = 'datasets/processed_sim_data/'
+        if data_path not in sys.path:
+            sys.path.append(data_path)
+        from preprocess_SIM import SIM_Dataset
+        dataset = SIM_Dataset(dataset_pth = data_path + 'l9b1' + '.pk')
 
     elif params.name == 'trimSyn':
         data_path = 'datasets/trimSyn/'
@@ -70,7 +91,6 @@ def get_dataset_processed(params):
             sys.path.append(data_path)
         from preprocess_trimSyn import trimSyn_Dataset
         dataset = trimSyn_Dataset(dataset_pth = data_path + params.name + '.pk', entities = params.entities)
-        
     else:
         print('Cannot find dataset name!')
         raise

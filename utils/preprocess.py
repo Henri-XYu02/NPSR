@@ -26,7 +26,6 @@ def downsample_data(list_arr, downsample, reduce_method=np.median, all_should_be
 def preprocess(dat, config, dims, entities, entity_id, quiet=False):
     assert 'x_trn' in dat.keys() and 'x_tst' in dat.keys() and 'lab_tst' in dat.keys()
     x_trn, x_tst, lab_tst = dat['x_trn'], dat['x_tst'], dat['lab_tst']
-  
     assert type(x_trn) is np.ndarray and type(x_tst) is np.ndarray and type(lab_tst) is np.ndarray
     assert x_trn.shape[-1] == dims and x_tst.shape[-1] == dims
     assert len(x_trn.shape) == 2 and len(x_tst.shape) == 2 and len(lab_tst.shape) == 1
@@ -75,6 +74,7 @@ def preprocess(dat, config, dims, entities, entity_id, quiet=False):
     assert (len(x_trn) - config.dl) % config.stride == 0
     assert len(x_tst) % tst_stride == 0
 
+    # Too many entities, don't create one-hot for SIM dataset
     if entities > 1 and config.train_method == 'train_together':
         entity = np.eye(entities)[entity_id]
         x_trn = np.concatenate((x_trn, np.tile(entity, (len(x_trn), 1))), axis=-1)
