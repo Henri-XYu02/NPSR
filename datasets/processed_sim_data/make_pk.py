@@ -25,8 +25,6 @@ ids = list(set(baseline['agent_id']).intersection(kitware['agent_id']).intersect
 ids = ids[0:len(ids)//2]
 print(len(ids))
 
-np.save(pth + 'ids.npy', ids)
-
 for j in range(len(ids)):
     i = ids[j]
     t = random.uniform(0, 14-1.4) * 86400
@@ -39,17 +37,6 @@ for j in range(len(ids)):
     mix3 = pd.concat([d3[(d3['time'] < t3)], i1, d3[(d3['time'] >= t3 + timegap)]], axis=0)
 
     # some label for one series [0,0,0,1,1,0,0,0]
-    label1 = np.zeros(len(mix1))
-    label1[len(d1[(d1['time'] < t1)]):len(d1[(d1['time'] < t1)])+len(i2)] = 1
-    lab1.append(label1)
-    
-    label2 = np.zeros(len(mix2))
-    label2[len(d2[(d2['time'] < t2)]):len(d2[(d2['time'] < t2)])+len(i3)] = 1
-    lab2.append(label2)
-    
-    label3 = np.zeros(len(mix3))
-    label3[len(d3[(d3['time'] < t3)]):len(d3[(d3['time'] < t3)])+len(i1)] = 1
-    lab3.append(label3)
     
     # some label for one series: 1 or 0
     split1, split2, split3 = int(len(mix1)*0.5), int(len(mix2)*0.5), int(len(mix3)*0.5)
@@ -61,6 +48,18 @@ for j in range(len(ids)):
     b9k1_tst.append(np.array(mix1)[split1:, 1:])
     k9l1_tst.append(np.array(mix2)[split2:, 1:])
     l9b1_tst.append(np.array(mix3)[split3:, 1:])
+
+    label1 = np.zeros(len(mix1))
+    label1[len(d1[(d1['time'] < t1)]):len(d1[(d1['time'] < t1)])+len(i2)] = 1
+    lab1.append(label1[split1:])
+    
+    label2 = np.zeros(len(mix2))
+    label2[len(d2[(d2['time'] < t2)]):len(d2[(d2['time'] < t2)])+len(i3)] = 1
+    lab2.append(label2[split2:])
+    
+    label3 = np.zeros(len(mix3))
+    label3[len(d3[(d3['time'] < t3)]):len(d3[(d3['time'] < t3)])+len(i1)] = 1
+    lab3.append(label3[split3:])
 
 assert len(b9k1_tst) == len(lab1) == len(b9k1)
 assert len(k9l1_tst) == len(lab2) == len(k9l1)
